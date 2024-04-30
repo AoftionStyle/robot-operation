@@ -3,20 +3,20 @@ package interview.com.ssctech.toy.robot.movement;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class MovementControllerTest {
-  @InjectMocks
+
+  @InjectMocks 
   private MovementController movementController;
 
   @Test
   void testFileInput() {
-    ReflectionTestUtils.setField(movementController, "fileInput", "file");
-    assertEquals("file", movementController.getFileInput());
+    ReflectionTestUtils.setField(movementController, "fileInput", "src/main/resources/static/file.txt");
+    assertEquals("src/main/resources/static/file.txt", movementController.getFileInput());
   }
 
   @Test
@@ -32,4 +32,5 @@ public class MovementControllerTest {
 
     assertEquals(null, result);
   }
+
 }

@@ -38,9 +38,14 @@ public class MovementController implements CommandLineRunner {
         System.out.println(line);
         String[] commands = line.split(" ");
         if ("PLACE".equals(commands[0])){
+          // new instance then go through command
           movementService = new MovementService();
         }
         executeCommand(commands, movementService);
+        if ("REPORT".equals(commands[0])) {
+          // clean instance and waiting for 'PLACE' if not command can not execute 
+          movementService = null;
+        }
       }
     } catch (Exception e) {
       e.printStackTrace();

@@ -41,7 +41,7 @@ public class MovementController implements CommandLineRunner {
           // new instance then go through command
           movementService = new MovementService();
         }
-        executeCommand(commands, movementService);
+        executeCommand(line, movementService);
         if ("REPORT".equals(commands[0])) {
           // clean instance and waiting for 'PLACE' if not command can not execute 
           movementService = null;
@@ -52,11 +52,11 @@ public class MovementController implements CommandLineRunner {
     }
   }
 
-  protected String executeCommand(String[] commands, MovementService movementService) {
+  protected String executeCommand(String line, MovementService movementService) {
     String result = null;
-    switch (commands[0]) {
+    switch (line.split(" ")[0]) {
       case "PLACE":
-        String[] placeInfo = commands[1].split(",");
+        String[] placeInfo = line.split(" ")[1].split(",");
         movementService.place(Integer.valueOf(placeInfo[0]), Integer.valueOf(placeInfo[1]), placeInfo[2]);
         break;
       case "MOVE":

@@ -23,14 +23,14 @@ public class MovementControllerTest {
   void testExecuteCommand() {
     MovementService movementService = new MovementService();
 
-    movementController.executeCommand(new String[]{"PLACE 1,2,EAST"}, movementService);
-    movementController.executeCommand(new String[]{"MOVE"}, movementService);
-    movementController.executeCommand(new String[]{"MOVE"}, movementService);
-    movementController.executeCommand(new String[]{"LEFT"}, movementService);
-    movementController.executeCommand(new String[]{"MOVE"}, movementService);
-    String result = movementController.executeCommand(new String[]{"REPORT"}, movementService);
+    movementController.executeCommand("PLACE 1,2,EAST", movementService);
+    movementController.executeCommand("MOVE", movementService);
+    movementController.executeCommand("MOVE", movementService);
+    movementController.executeCommand("LEFT", movementService);
+    movementController.executeCommand("MOVE", movementService);
+    String result = movementController.executeCommand("REPORT", movementService);
 
-    assertEquals(null, result);
+    assertEquals("Output: 3,3,NORTH", result);
   }
 
 }

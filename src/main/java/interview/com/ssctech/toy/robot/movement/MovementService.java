@@ -26,7 +26,7 @@ public class MovementService implements Movement {
 
   @Override
   public void place(int x, int y, String f) {
-    if (verifyPosition(x) && !verifyPosition(y)) {
+    if (verifyPosition(x) && verifyPosition(y)) {
       this.xPos = x;
       this.yPos = y;    
     }

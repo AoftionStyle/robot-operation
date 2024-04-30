@@ -59,12 +59,42 @@ public class MovementService implements Movement {
 
   @Override
   public void left() {
-    //TODO
+    if (this.facing == null) throw new NullPointerException("Place facing before turn left");
+
+    switch (this.facing) {
+      case NORTH:
+        this.facing = Direction.WEST;
+        break;
+      case WEST:
+        this.facing = Direction.SOUTH;
+        break;
+      case SOUTH:
+        this.facing = Direction.EAST;
+        break;
+      case EAST:
+        this.facing = Direction.NORTH;
+        break;
+    }
   }
 
   @Override
   public void right() {
-    //TODO
+    if (this.facing == null) throw new NullPointerException("Place facing before turn right");
+
+    switch (this.facing) {
+      case NORTH:
+        this.facing = Direction.EAST;
+        break;
+      case EAST:
+        this.facing = Direction.SOUTH;
+        break;
+      case SOUTH:
+        this.facing = Direction.WEST;
+        break;
+      case WEST:
+        this.facing = Direction.NORTH;
+        break;
+    }
   }
 
   @Override

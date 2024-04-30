@@ -28,9 +28,11 @@ public class MovementControllerTest {
     movementController.executeCommand("MOVE", movementService);
     movementController.executeCommand("LEFT", movementService);
     movementController.executeCommand("MOVE", movementService);
+    movementController.executeCommand("RIGHT", movementService);
+    movementController.executeCommand("MOVE", movementService);
     String result = movementController.executeCommand("REPORT", movementService);
 
-    assertEquals("Output: 3,3,NORTH", result);
+    assertEquals("Output: 4,3,EAST", result);
   }
 
 }

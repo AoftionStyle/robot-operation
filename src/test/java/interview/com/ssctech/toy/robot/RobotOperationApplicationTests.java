@@ -10,4 +10,8 @@ class RobotOperationApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+  public void applicationStarts() {
+    RobotOperationApplication.main(new String[] {});
+  }
 }

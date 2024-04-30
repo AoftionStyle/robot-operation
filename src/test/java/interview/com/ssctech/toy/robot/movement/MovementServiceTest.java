@@ -87,6 +87,55 @@ public class MovementServiceTest {
     assertEquals(Direction.NORTH, movementService.getFacing());
   }
 
+
+  @Test
+  void testLeftWhenNonPlace() {
+    Exception ex = assertThrows(NullPointerException.class, () -> {
+      movementService.left();
+    });
+
+    assertEquals("Place facing before turn left", ex.getMessage());
+  }
+
+  @Test
+  void testLeft_ExpectedFacingWest() {
+    movementService.place(0, 0, "NORTH");
+    movementService.left();
+    assertEquals(Direction.WEST, movementService.getFacing());
+  }
+
+  @Test
+  void testRightWhenNonPlace() {
+    Exception ex = assertThrows(NullPointerException.class, () -> {
+      movementService.right();
+    });
+
+    assertEquals("Place facing before turn right", ex.getMessage());
+  }
+
+  @Test
+  void testLeft_ExpectedFacingEast() {
+    movementService.place(0, 0, "NORTH");
+    movementService.right();
+    assertEquals(Direction.EAST, movementService.getFacing());
+  }
+
+  @Test
+  void testLeftAndRight_ExpectedFacingStand() {
+    movementService.place(0, 0, "NORTH");
+    movementService.left();
+    movementService.right();
+    assertEquals(Direction.NORTH, movementService.getFacing());
+  }
+
+  @Test
+  void testRightAndLeft_ExpectedFacingStand() {
+    movementService.place(0, 0, "EAST");
+    movementService.left();
+    movementService.right();
+    assertEquals(Direction.EAST, movementService.getFacing());
+  }
+
   @Test
   void testReportWhenNonPlace() {
     assertEquals("Output: 0,0,null", movementService.report());

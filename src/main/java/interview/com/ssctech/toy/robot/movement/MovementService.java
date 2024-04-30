@@ -20,9 +20,21 @@ public class MovementService implements Movement {
     yPos = 0;
   }
 
+  protected boolean verifyPosition(int position) {
+    return position >= MIN_POSITION && position <= MAX_POSITION ? true : false;
+  }
+
   @Override
   public void place(int x, int y, String f) {
-    //TODO
+    if (verifyPosition(x) && !verifyPosition(y)) {
+      this.xPos = x;
+      this.yPos = y;    
+    }
+    try {
+      this.facing = Direction.valueOf(f);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("Invalid facing: " + f);
+    }
   }
 
   @Override

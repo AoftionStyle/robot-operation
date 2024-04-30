@@ -31,18 +31,46 @@ public class MovementController implements CommandLineRunner {
     try (BufferedReader br = new BufferedReader(
         new InputStreamReader(Files.newInputStream(filePath), StandardCharsets.UTF_8))) {
       String line;
-
-      // open loop read line
       MovementService movementService = null;
+  
+      // open loop read line
       while ((line = br.readLine()) != null) {
         System.out.println(line);
-        if ("PLACE".equals(line.split(" ")[0])){
+        String[] commands = line.split(" ");
+        if ("PLACE".equals(commands[0])){
           movementService = new MovementService();
         }
+        executeCommand(commands, movementService);
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  protected String executeCommand(String[] commands, MovementService movementService) {
+    String result = null;
+    switch (commands[0]) {
+      case "PLACE":
+        String[] placeInfo = commands[1].split(",");
+        movementService.place(Integer.valueOf(placeInfo[0]), Integer.valueOf(placeInfo[1]), placeInfo[2]);
+        break;
+      case "MOVE":
+        movementService.move();
+        break;
+      case "LEFT":
+        movementService.left();
+        break;
+      case "RIGHT":
+        movementService.right();
+        break;
+      case "REPORT":
+        result = movementService.report();
+        break;
+      default:
+        System.out.println("-----------------------");
+        break;
+    }
+    return result;
   }
 
 }

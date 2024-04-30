@@ -57,6 +57,36 @@ public class MovementServiceTest {
     assertEquals(Direction.NORTH, movementService.getFacing());
   }
 
+
+  @Test
+  void testMoveWhenNonPlace() {
+    Exception ex = assertThrows(NullPointerException.class, () -> {
+      movementService.move();
+    });
+
+    assertEquals("Place facing before move", ex.getMessage());
+  }
+
+  @Test
+  void testMove_ExpectedXZeroYOneFNorth() {
+    movementService.place(0, 0, "NORTH");
+    movementService.move();
+
+    assertEquals(0, movementService.getXPos());
+    assertEquals(1, movementService.getYPos());
+    assertEquals(Direction.NORTH, movementService.getFacing());
+  }
+
+  @Test
+  void testMoveCannotOverBorder_ExpectedXZeroYFourFNorth() {
+    movementService.place(0, 4, "NORTH");
+    movementService.move();
+
+    assertEquals(0, movementService.getXPos());
+    assertEquals(4, movementService.getYPos());
+    assertEquals(Direction.NORTH, movementService.getFacing());
+  }
+
   @Test
   void testReportWhenNonPlace() {
     assertEquals("Output: 0,0,null", movementService.report());
